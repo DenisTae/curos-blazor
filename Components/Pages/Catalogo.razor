@@ -1,0 +1,62 @@
+@page "/catalogo"
+
+<h3>Catálogo de Cafés</h3>
+
+@foreach (var cafe in lstCafes)
+{
+    <div>
+        <img src="@cafe.Imagen" width="150" />
+        <h2>@cafe.NombreCafe</h2>
+        <p>@cafe.DescripcionCafe</p>
+        <p>@cafe.PrecioCafe Bs.</p>
+    </div>
+}
+@* Imagen, NombreCafe, DescripcionCafe, PrecioCafe *@
+@code {
+    private List<Cafe> lstCafes = new List<Cafe>()
+    {
+        new Cafe()
+        {
+            Imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxy3V8RO0kq2Qr1ioTNxPKnMoONgzOr-S_uxNDEOf2oxrAppeDHsrNjUDV&s=10",
+            NombreCafe = "Café Clásico",
+            DescripcionCafe = "Café suave y aromático.",
+            PrecioCafe = 13
+        },
+        new Cafe()
+        {
+            Imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxy3V8RO0kq2Qr1ioTNxPKnMoONgzOr-S_uxNDEOf2oxrAppeDHsrNjUDV&s=10",
+            NombreCafe = "Café Expreso",
+            DescripcionCafe = "Café fuerte e intenso.",
+            PrecioCafe = 20
+        },
+        new Cafe()
+        {
+            Imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxy3V8RO0kq2Qr1ioTNxPKnMoONgzOr-S_uxNDEOf2oxrAppeDHsrNjUDV&s=10",
+            NombreCafe = "Café Capuchino",
+            DescripcionCafe = "Con leche vaporizada y espuma.",
+            PrecioCafe = 13
+        },
+        new Cafe()
+        {
+            Imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxy3V8RO0kq2Qr1ioTNxPKnMoONgzOr-S_uxNDEOf2oxrAppeDHsrNjUDV&s=10",
+            NombreCafe = "Café Mocha",
+            DescripcionCafe = "Mezcla de café y chocolate.",
+            PrecioCafe = 20
+        },
+        new Cafe()
+        {
+            Imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxy3V8RO0kq2Qr1ioTNxPKnMoONgzOr-S_uxNDEOf2oxrAppeDHsrNjUDV&s=10",
+            NombreCafe = "Café Helado",
+            DescripcionCafe = "Frío y refrescante.",
+            PrecioCafe = 15
+        }
+    };
+
+    public class Cafe
+    {
+        public string Imagen { get; set; } = "";
+        public string NombreCafe { get; set; } = "";
+        public string DescripcionCafe { get; set; } = "";
+        public decimal PrecioCafe { get; set; }
+    }
+}
