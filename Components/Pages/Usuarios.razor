@@ -1,0 +1,42 @@
+@page "/usuarios"
+
+@foreach (Usuario usuario in lstUsuarios)
+{
+    <div>
+        <div>@usuario.Nombre @usuario.Apellido</div>
+        <div>Color: @usuario.ColorPiel</div>
+        <div>@usuario.Email</div>
+        <div>@usuario.Password</div>
+        <div>@usuario.Estatura</div>
+        <div>@usuario.FechaNac.ToString("yyyy-MM-dd")</div>
+    </div>
+}
+
+@code {
+
+    private List<Usuario> lstUsuarios = new()
+    {
+        new Usuario { Nombre = "Mateo", Apellido = "Vargas", Email = "mateo.vargas@example.com", Password = "DemoMateo01!", FechaNac = new DateTime(2001, 3, 15), ColorPiel = "Morena", Estatura = 1.75 },
+        new Usuario { Nombre = "Valentina", Apellido = "Rojas", Email = "valentina.rojas@example.com", Password = "DemoVale02!", FechaNac = new DateTime(2002, 7, 22), ColorPiel = "Clara", Estatura = 1.62 },
+        new Usuario { Nombre = "Santiago", Apellido = "Flores", Email = "santiago.flores@example.com", Password = "DemoSanti03!", FechaNac = new DateTime(2000, 11, 8), ColorPiel = "Oscura", Estatura = 1.80 },
+        new Usuario { Nombre = "Camila", Apellido = "Mendoza", Email = "camila.mendoza@example.com", Password = "DemoCami04!", FechaNac = new DateTime(2003, 1, 30), ColorPiel = "Trigueña", Estatura = 1.65 },
+        new Usuario { Nombre = "Sebastián", Apellido = "Torres", Email = "sebastian.torres@example.com", Password = "DemoSeba05!", FechaNac = new DateTime(1999, 9, 12), ColorPiel = "Clara", Estatura = 1.78 },
+        new Usuario { Nombre = "Lucía", Apellido = "Castro", Email = "lucia.castro@example.com", Password = "DemoLucia06!", FechaNac = new DateTime(2001, 5, 18), ColorPiel = "Trigueña", Estatura = 1.60 },
+        new Usuario { Nombre = "Diego", Apellido = "Morales", Email = "diego.morales@example.com", Password = "DemoDiego07!", FechaNac = new DateTime(1998, 12, 5), ColorPiel = "Morena", Estatura = 1.82 },
+        new Usuario { Nombre = "Mariana", Apellido = "Gómez", Email = "mariana.gomez@example.com", Password = "DemoMari08!", FechaNac = new DateTime(2002, 4, 14), ColorPiel = "Clara", Estatura = 1.68 },
+        new Usuario { Nombre = "Andrés", Apellido = "Silva", Email = "andres.silva@example.com", Password = "DemoAndres09!", FechaNac = new DateTime(2000, 8, 25), ColorPiel = "Trigueña", Estatura = 1.73 },
+        new Usuario { Nombre = "Sofia", Apellido = "Herrera", Email = "sofia.herrera@example.com", Password = "DemoSofi10!", FechaNac = new DateTime(2004, 2, 10), ColorPiel = "Morena", Estatura = 1.59 }
+    };
+
+    public class Usuario
+    {
+        public string Nombre { get; set; } = "";
+        public string Apellido { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+        public DateTime FechaNac { get; set; }
+        public string ColorPiel { get; set; } = "";
+        public double Estatura { get; set; }
+    }
+
+}

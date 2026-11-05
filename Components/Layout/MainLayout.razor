@@ -1,3 +1,4 @@
+
 @inherits LayoutComponentBase
 @implements IDisposable
 @inject NavigationManager NavigationManager
@@ -5,74 +6,124 @@
 <div class="flex min-h-screen flex-col md:flex-row">
 
     <main class="flex-1">
-        <div class="flex w-full items-center justify-between border-b border-gray-200 bg-gray-50 px-4">
-            <div class="flex gap-2">
+
+        <div class="flex w-full flex-wrap items-center justify-between gap-3 border-b border-[#e9e3d9] bg-[#292820] px-5 py-3">
+
+            <div class="flex flex-wrap items-center gap-2">
+
                 @foreach (var link in links)
                 {
-                    <NavLink class="ui-btn ui-btn-primary" href="@link.Address" Match="NavLinkMatch.All">
+                    <NavLink class="ui-btn ui-btn-primary nav-button"
+                             href="@link.Address"
+                             Match="NavLinkMatch.All">
                         @link.Label
                     </NavLink>
                 }
+
             </div>
 
-            <div class="flex h-14 items-center justify-end">
+            <div class="flex items-center justify-end gap-2">
+
                 <AuthorizeView>
+
                     <NotAuthorized>
-                        <div class="ui-btn ui-btn-primary">
-                            <NavLink href="Account/Login">Iniciar Sesion</NavLink>
-                        </div>
+                        <NavLink href="Account/Login"
+                                 class="ui-btn ui-btn-primary nav-button">
+                            Iniciar sesión
+                        </NavLink>
                     </NotAuthorized>
-                    <Authorized>
-                        <div class="ui-btn-primary ui-btn mx-2">
-                            <NavLink href="Account/Manage"> @context.User.Identity?.Name
-                            </NavLink>
-                        </div>
-                        <div class="ui-btn-primary ui-btn mx-2">
-                            <form action="Account/Logout" method="post">
-                                <AntiforgeryToken />
-                                <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                                <button type="submit">
-                                    Logout
-                                </button>
-                            </form>
-                        </div>
+
+                    <Authorized Context="context">
+
+                        <NavLink href="Account/Manage"
+                                 class="ui-btn ui-btn-primary nav-button">
+                            @context.User.Identity?.Name
+                        </NavLink>
+
+                        <form action="Account/Logout" method="post">
+                            <AntiforgeryToken />
+                            <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+
+                            <button type="submit"
+                                    class="ui-btn ui-btn-primary nav-button">
+                                Cerrar sesión
+                            </button>
+                        </form>
+
                     </Authorized>
+
                 </AuthorizeView>
+
             </div>
 
         </div>
-    
-        <article class=" px-4 pt-4">
+
+        <article class="px-4 pt-4">
             @Body
         </article>
+
     </main>
+
 </div>
 
-<div id="blazor-error-ui" data-nosnippet
+<div id="blazor-error-ui"
+     data-nosnippet
      class="fixed inset-x-0 bottom-0 z-50 hidden bg-yellow-100 px-5 py-2 shadow-[0_-1px_2px_rgba(0,0,0,0.2)]">
+
     An unhandled error has occurred.
+
     <a href="." class="reload underline">Reload</a>
+
     <span class="dismiss absolute right-3 top-2 cursor-pointer">🗙</span>
+
 </div>
+
+<style>
+
+    .nav-button {
+        display: inline-block;
+        padding: 9px 18px;
+        border-radius: 3px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .nav-button:hover {
+        background-color: #8b765d;
+        color: white;
+    }
+
+    .nav-button.active {
+        background-color: #8b765d;
+        color: white;
+    }
+
+</style>
 
 @code {
+
     private string? currentUrl;
 
-    private List<Link> links = new List<Link>()
+    private List<Link> links = new()
     {
-        new("Inicio", "/"),
-        new Link("Catalogo", address:"/catalogo"),
+        new Link("Inicio", "/"),
+        new Link("Catalogo", "/catalogo"),
+        new Link("Usuarios", "/usuarios")
     };
 
     protected override void OnInitialized()
     {
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+
         NavigationManager.LocationChanged += OnLocationChanged;
     }
 
     private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+
         StateHasChanged();
     }
 
@@ -92,4 +143,5 @@
             Address = address;
         }
     }
+
 }
