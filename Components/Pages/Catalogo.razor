@@ -1,79 +1,44 @@
-
 @page "/catalogo"
+@using sharpness_sharp.Components.Pages.UAComponents
+
+<button @onclick="MonstratMensale" class="ui-btn ui-btn-primary">Pulsame Baby</button>
+<button @onclick="AñadirCafe" class="ui-btn ui-btn-primary">Agregar Café</button>
+
+<h2></h2>
 
 <div class="min-h-screen bg-[#f7f5f0] p-6">
-
     <div class="max-w-7xl mx-auto">
-
         <div class="text-center mb-10">
             <span class="text-sm font-bold tracking-[0.25em] uppercase text-[#66836b]">
                 Coffee Experience
             </span>
-
             <h1 class="text-4xl md:text-5xl font-extrabold text-[#382b23] mt-3">
                 Nuestro Catálogo de Café
             </h1>
-
             <p class="text-gray-500 mt-3 text-base">
                 Descubre nuestra selección de cafés y disfruta cada momento.
             </p>
-
             <div class="w-16 h-1 bg-[#8b9d72] mx-auto mt-5 rounded-full"></div>
         </div>
-
         <div class="flex justify-between items-center mb-7">
             <h2 class="text-2xl font-bold text-[#382b23]">
                 Variedades disponibles
             </h2>
-
             <span class="bg-[#e8eee3] text-[#557451] px-4 py-2 rounded-full text-sm font-bold">
                 @lstCafes.Count cafés
             </span>
         </div>
-
+        <div class="grid grid-cols-4 gap-4 gap-4 gap-4 mb-7">
+                @foreach(var mensaje in lstMensajes)
+                {
+                    <p class="ui-btn ui-btn-primary">@mensaje</p>
+                }
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
-
             @foreach (Cafe cafe in lstCafes)
             {
-                <div class="cafe-card bg-white rounded-2xl overflow-hidden border border-[#ebe6dd] shadow-sm flex flex-col">
-
-                    <div class="relative overflow-hidden h-56">
-                        <img src="@cafe.Imagen"
-                             alt="@cafe.NombreCafe"
-                             class="w-full h-full object-cover cafe-image" />
-
-                        <span class="absolute top-3 right-3 bg-white/95 text-[#66836b] text-xs font-bold px-4 py-2 rounded-full shadow-sm">
-                            ☕ Especial
-                        </span>
-                    </div>
-
-                    <div class="p-5 flex flex-col flex-grow">
-
-                        <h2 class="text-xl font-extrabold text-[#382b23] mb-3">
-                            @cafe.NombreCafe
-                        </h2>
-
-                        <p class="text-gray-500 text-sm leading-relaxed flex-grow">
-                            @cafe.DescripcionCafe
-                        </p>
-
-                        <div class="flex justify-between items-center mt-5 pt-4 border-t border-[#eeeae3]">
-
-                            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                                Precio
-                            </span>
-
-                            <span class="bg-[#edf3e9] text-[#52734f] font-extrabold text-lg px-4 py-2 rounded-xl">
-                                Bs. @cafe.PrecioCafe
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                <CoffeeCard imagen="@cafe.Imagen" nombreCafe="@cafe.NombreCafe" descripcionCafe="@cafe.DescripcionCafe" precioCafe="@cafe.PrecioCafe"></CoffeeCard>
             }
-
         </div>
 
         <div class="text-center mt-12 py-6 border-t border-[#e8e1d7]">
@@ -109,7 +74,20 @@
 </style>
 
 @code {
-
+    List<string> lstMensajes = new();
+    void MonstratMensale()
+    {
+        lstMensajes.Add("No me toques");
+    }
+    void AñadirCafe()
+    {
+        lstCafes.Add(new Cafe(
+            "https://cuplacoffee.com/wp-content/uploads/2025/03/what-is-an-americano-featured.jpg",
+            "Nuevo Café",
+            "@descripcionCafe",
+            20m
+        ));
+    }
     private List<Cafe> lstCafes = new()
     {
         new Cafe(
@@ -252,4 +230,6 @@
             PrecioCafe = precioCafe;
         }
     }
+
 }
+//crear un boton que al ser pulsado agrege un cafe a la lista de cafes

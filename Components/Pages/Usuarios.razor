@@ -2,7 +2,7 @@
 
 @foreach (Usuario usuario in lstUsuarios)
 {
-    <div>
+    <div class="border ">
         <div>@usuario.Nombre @usuario.Apellido</div>
         <div>Color: @usuario.ColorPiel</div>
         <div>@usuario.Email</div>
@@ -13,7 +13,7 @@
 }
 
 @code {
-
+    
     private List<Usuario> lstUsuarios = new()
     {
         new Usuario { Nombre = "Mateo", Apellido = "Vargas", Email = "mateo.vargas@example.com", Password = "DemoMateo01!", FechaNac = new DateTime(2001, 3, 15), ColorPiel = "Morena", Estatura = 1.75 },
